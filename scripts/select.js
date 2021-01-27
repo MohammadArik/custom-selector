@@ -73,29 +73,31 @@ function setupCustomElement(select) {
             case "Space":
                 select.optionsCustomElement.classList.toggle('show');
                 break
-            case "ArrowUp":
+            case "ArrowUp": {
                 const prevOption = select.options[select.selectedOptionIndex - 1];
                 if (prevOption) {
                     select.selectValue(prevOption.value)
                 } else {
                     select.selectValue(select.options[select.options.length - 1].value);
                 }
-                break
-            case "ArrowDown":
+                break;
+            }
+            case "ArrowDown": {
                 const nextOption = select.options[select.selectedOptionIndex + 1];
                 if (nextOption) {
                     select.selectValue(nextOption.value)
                 } else {
                     select.selectValue(select.options[0].value);
                 }
-                break
+                break;
+            }
             case "Enter":
             case "Escape":
                 select.optionsCustomElement.classList.remove("show");
-            default:
+                break;
+            default: {
                 clearTimeout(debounceTimeout);
                 searchTerm += e.key;
-                console.log(searchTerm)
                 debounceTimeout = setTimeout(() => {
                     searchTerm = "";
                 }, 500);
@@ -107,7 +109,7 @@ function setupCustomElement(select) {
                 if (searchedOption) {
                     select.selectValue(searchedOption.value);
                 }
-
+            }
         }
     });
 }
